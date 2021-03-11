@@ -120,13 +120,15 @@ function onMIDISuccess(access) {
       //ignore clock messages
 
       if (message.data[0] != 248){
-        document.querySelector("#messages").innerText +=  `# ${midiInput.name}
-            ${new Date()}
-            ==================================
-            - Status: ${message.data[0]}
-            - Data 1: ${message.data[1]}
-            - Data 2: ${message.data[2]}
-            ==================================\n\n`;
+        // document.querySelector("#messages").innerText +=  `# ${midiInput.name}
+        //     ${new Date()}
+        //     ==================================
+        //     - Status: ${message.data[0]}
+        //     - Data 1: ${message.data[1]}
+        //     - Data 2: ${message.data[2]}
+        //     ==================================\n\n`;
+
+        document.querySelector("#messages").innerText +=  `MIDI CC: ${message.data[1]} Value: ${message.data[2]}\n`;
         }
       }
       
@@ -150,7 +152,7 @@ function onMIDISuccess(access) {
     }
     document.querySelector("#inputs").innerText = inputText.join('');
     document.querySelector("#outputs").innerText = outputText.join('');  
-    
+
     //playNote();
     sendMessage();
  
