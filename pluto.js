@@ -63,6 +63,7 @@ const sendMessage = function(){
 if (!('requestMIDIAccess' in navigator)) {
   alert('Unable to access MIDI devices. Make sure your devices are connected and try using the Chrome broswer.');
   // console.log('Could not access your MIDI devices.'); 
+
 } else {
 
   navigator.requestMIDIAccess( { sysex: true } ).then( onMIDISuccess, onMIDIFailure );
@@ -141,13 +142,15 @@ function onMIDISuccess(access) {
       }
     })
       
-    document.querySelector("#inputs").innerText = inputText.join('');
-    document.querySelector("#outputs").innerText = outputText.join('');  
+
 
     if (plutoDetected != 1){
-      alert('Unable to find a MIDI connection to Pluto. Check your connections and hit refresh to try again.');
+      //alert('Unable to find a MIDI connection to Pluto. Check your connections and hit refresh to try again.');
+      outputText.push(`Unable to find a MIDI connection to Pluto. Check your connections and hit refresh to try again.`);
     }
-
+    document.querySelector("#inputs").innerText = inputText.join('');
+    document.querySelector("#outputs").innerText = outputText.join('');  
+    
     //playNote();
     sendMessage();
  
