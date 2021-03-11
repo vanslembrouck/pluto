@@ -17,11 +17,36 @@
 		input[type=range][orient=vertical]{
 		    writing-mode: bt-lr; /* IE */
 		    -webkit-appearance: slider-vertical; /* WebKit */
-		    width: 10px;
-		    height: 100px;
-		    padding: 0 5px;
+		    height: 200px;
 		    color: #000;
+		    background-color: #9a905d;
+			height: 200px !important;
+			border-radius: 0px !important;
+			width: 2px !important;
+			position: relative;
+			left: 37px;
 		}
+
+		.slider{
+		    background: #FFF;
+		    width: 80px;
+		    display: inline-block;
+		    padding: 20px 0px 20px 0px;
+		}
+
+		.slider-label, .slider-value{
+			display: block;
+			width: 100%;
+			text-align: center;
+			padding-top: 4px;
+			padding-bottom: 4px;
+		}
+
+		.slider-value{
+			font-weight: normal;
+		}
+	
+	
 
 	</style>
 
@@ -31,8 +56,23 @@
 <body >
 	<h1>Pluto WebMIDI Test</h1>
 
-	<input id="slider1" type="range" orient="vertical" value="63" min="0" max="127" onmousemove="showVal(this.value, 'slider1val')"/>
-	<span id="slider1val">63</span>
+	<div class="slider">
+		<span id="slider1val" class="slider-value">63</span>
+		<input id="slider1" type="range" orient="vertical" value="63" min="0" max="127" onmousemove="showVal(this.value, 'slider1val')"/>
+		<span class="slider-label">Voice 1</span>
+	</div>
+
+	<div class="slider">
+		<span id="slider2val" class="slider-value">63</span>
+		<input id="slider2" type="range" orient="vertical" value="63" min="0" max="127" onmousemove="showVal(this.value, 'slider2val')"/>
+		<span class="slider-label" >Voice 2</span>
+	</div>
+
+	<div class="slider">
+		<span id="slider3val" class="slider-value">63</span>
+		<input id="slider3" type="range" orient="vertical" value="63" min="0" max="127" onmousemove="showVal(this.value, 'slider3val')"/>
+		<span class="slider-label">Effects</span>
+	</div>
 
 	<h2>Connection status</h2>
 	<pre id="inputs"></pre>
