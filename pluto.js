@@ -56,6 +56,11 @@ const sendMessage = function(){
 }
 
 
+function sendSimpleCC(control, value) {
+  var message = [CC, control, value];    
+  midiOutput.send(message);
+  
+}
 
 
 
@@ -114,7 +119,7 @@ function onMIDISuccess(access) {
         plutoDetected = 1;
       }
 
-        
+          
       midiInput.onmidimessage = function(message) {  
 
       //ignore clock messages
@@ -128,19 +133,17 @@ function onMIDISuccess(access) {
         //     - Data 2: ${message.data[2]}
         //     ==================================\n\n`;
 
-        document.querySelector("#messages").innerText +=  `MIDI CC: ${message.data[1]} Value: ${message.data[2]}\n`;
+        //document.querySelector("#messages").innerText +=  `MIDI CC: ${message.data[1]} Value: ${message.data[2]}\n`;
         }
       }
-      
-
     })
   
     outputs.forEach((midiOutput) => { 
       //outputText.push(`FOUND: ${midiOutput.name}`);
 
-    if (midiOutput.name == "Pluto" && midiOutput.manufacturer == "Modern Sounds"){
-        outputText.push(`✓ Pluto MIDI output detected`);
-        plutoDetected = 1;
+      if (midiOutput.name == "Pluto" && midiOutput.manufacturer == "Modern Sounds"){
+          outputText.push(`✓ Pluto MIDI output detected`);
+          plutoDetected = 1;
       }
     })
       
@@ -148,13 +151,13 @@ function onMIDISuccess(access) {
 
     if (plutoDetected != 1){
       //alert('Unable to find a MIDI connection to Pluto. Check your connections and hit refresh to try again.');
-      outputText.push(`Unable to find a MIDI connection to Pluto. Check your connections and hit refresh to try again.`);
+      outputText.push(`Unable to find a MIDI connection to Pluto. Refresh page to try again.`);
     }
     document.querySelector("#inputs").innerText = inputText.join('');
     document.querySelector("#outputs").innerText = outputText.join('');  
 
     //playNote();
-    sendMessage();
+    //sendMessage();
  
 }
 
@@ -164,6 +167,13 @@ function onMIDIFailure() {
 
 function showVal(newVal, span){
     document.getElementById(span).innerHTML=newVal;
+    console.log(newVal);
+}
+
+function updateSlider(control, value, label){
+    document.getElementById(label).innerHTML=value;
+    sendSimpleCC(control, value); 
+    console.log(value);
 }
 
 const mySlider = document.getElementById('slider1');
