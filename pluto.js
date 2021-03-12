@@ -39,9 +39,9 @@ const sendMessage = function(){
   midiOutput.send([CC, 115, 0x7f]);
 
   dump = [0];
-  testArray = [3, 4, 5, 6, 7, 3, 4, 5, 6, 7, 3, 4, 5, 6, 7, 3, 4, 5, 6, 99,
-                3, 4, 5, 6, 7, 3, 4, 5, 6, 7, 3, 4, 5, 6, 7, 3, 4, 5, 6, 99,
-                3, 4, 5, 6, 7, 3, 4, 5, 6, 7, 3, 4, 5, 6, 7, 3, 4, 5, 6, 99];
+  testArray = [255, 4, 5, 6, 7, 3, 4, 5, 6, 7, 3, 4, 5, 6, 7, 3, 4, 5, 6, 99,
+                3, 4, 5, 127, 7, 3, 4, 5, 6, 7, 3, 4, 5, 6, 7, 3, 4, 5, 6, 99,
+                3, 4, 5, 6, 7, 3, 4, 5, 6, 7, 3, 4, 5, 6, 7, 3, 4, 5, 6, 17];
 
   for (i=testArray.length+1; i>0; i--){
     dump[i] = testArray[i-1];
@@ -79,20 +79,27 @@ if (!('requestMIDIAccess' in navigator)) {
 
 
 
-function onMIDISuccess(midiAccess) {
-    console.log(midiAccess);
-
-    var inputs = midiAccess.inputs;
-    var outputs = midiAccess.outputs;
-}
+// function onMIDISuccess(midiAccess) {
+//     console.log(midiAccess);
+//     var inputs = midiAccess.inputs;
+//     var outputs = midiAccess.outputs;
+// }
 
 function onMIDIFailure() {
     console.log('Could not access your MIDI devices.');
 }
 
+access.onstatechange = function(e) {
 
-
+   // Print information about the (dis)connected MIDI controller
+   console.log(e.port.name, e.port.manufacturer, e.port.state);
+ };
+     
 function onMIDISuccess(access) {
+   checkForPluto(access);
+}
+
+function checkForPluto(access) {
     let plutoDetected = 0;
 
     const outputValues = access.outputs.values();
@@ -115,8 +122,8 @@ function onMIDISuccess(access) {
       //inputText.push(`FOUND: ${midiInput.name}`);
 
       if (midiInput.name == "Pluto" && midiInput.manufacturer == "Modern Sounds"){
-        inputText.push(`✓ Pluto MIDI input detected`);
-        plutoDetected = 1;
+        //inputText.push(`✓ Pluto MIDI input detected`);
+        plutoDetected += 1;
       }
 
           
@@ -142,22 +149,32 @@ function onMIDISuccess(access) {
       //outputText.push(`FOUND: ${midiOutput.name}`);
 
       if (midiOutput.name == "Pluto" && midiOutput.manufacturer == "Modern Sounds"){
-          outputText.push(`✓ Pluto MIDI output detected`);
-          plutoDetected = 1;
+         //outputText.push(`✓ Pluto MIDI output detected`);
+          plutoDetected += 1;
       }
     })
       
 
 
-    if (plutoDetected != 1){
+    if (plutoDetected < 1){
       //alert('Unable to find a MIDI connection to Pluto. Check your connections and hit refresh to try again.');
-      outputText.push(`Unable to find a MIDI connection to Pluto. Refresh page to try again.`);
+      outputText.push(`Unable to find a MIDI connection to Pluto.`);
+
+      setTimeout(function (access) {
+          checkForPluto(access); 
+          console.log("checking again");
+      }, 1000, access);
+
+    } else {
+      outputText.push(`✓ Pluto connected`);
+
+      sendMessage();
     }
+
     document.querySelector("#inputs").innerText = inputText.join('');
     document.querySelector("#outputs").innerText = outputText.join('');  
-
     //playNote();
-    //sendMessage();
+    
  
 }
 
