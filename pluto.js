@@ -12,12 +12,17 @@ sequence =  intervals.map(x => x + START);
 const NOTE_ON = 0x90;     //144
 const NOTE_OFF = 0x80;    //128
 const CC = 0xB0;          //176
-
 const NOTE_DURATION = 200;
 
 
+let searchingMessages = [
+  "Looking for Pluto", 
+  "Looking for Pluto.",  
+  "Looking for Pluto..",  
+  "Looking for Pluto..." 
+];
 
-
+searchingMessageIndex = 0;
 
 const playNote = function() {
   if (currentSequenceId >= 0) {
@@ -94,7 +99,7 @@ access.onstatechange = function(e) {
    // Print information about the (dis)connected MIDI controller
    console.log(e.port.name, e.port.manufacturer, e.port.state);
  };
-     
+
 function onMIDISuccess(access) {
    checkForPluto(access);
 }
@@ -129,9 +134,18 @@ function checkForPluto(access) {
           
       midiInput.onmidimessage = function(message) {  
 
-      //ignore clock messages
 
+      
+      //ignore clock messages
       if (message.data[0] != 248){
+        data = message.data; // this gives us our [command/channel, note, velocity] data.
+        console.log('MIDI data', data); // MIDI data [144, 63, 73]
+
+        if (data[0] == 240){
+          console.log("receiveSysex");
+          receiveSysex(data);
+        }
+
         // document.querySelector("#messages").innerText +=  `# ${midiInput.name}
         //     ${new Date()}
         //     ==================================
@@ -158,17 +172,23 @@ function checkForPluto(access) {
 
     if (plutoDetected < 1){
       //alert('Unable to find a MIDI connection to Pluto. Check your connections and hit refresh to try again.');
-      outputText.push(`Unable to find a MIDI connection to Pluto.`);
+
+
+      searchingMessageIndex = (searchingMessageIndex + 1) % searchingMessages.length;
+
+      var s = searchingMessages[searchingMessageIndex];
+      outputText.push(s);
 
       setTimeout(function (access) {
           checkForPluto(access); 
           console.log("checking again");
-      }, 1000, access);
+      }, 300, access);
 
     } else {
-      outputText.push(`✓ Pluto connected`);
+      outputText.push(`Pluto connected!`);
 
-      sendMessage();
+      //sendMessage();
+      sendSimpleCC(77, 77);
     }
 
     document.querySelector("#inputs").innerText = inputText.join('');
@@ -181,6 +201,21 @@ function checkForPluto(access) {
 function onMIDIFailure() {
     console.log('Could not access your MIDI devices.');
 }
+
+
+
+function receiveSysex(data){
+
+  var version = data[1];
+
+  for (i=2; i < data.length - 1; i++){
+      version += '.' + data[i];
+  }
+
+  document.querySelector("#messages").innerText += "Firmware " + version;
+}
+
+
 
 function showVal(newVal, span){
     document.getElementById(span).innerHTML=newVal;
