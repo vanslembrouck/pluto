@@ -94,11 +94,7 @@ function onMIDIFailure() {
     console.log('Could not access your MIDI devices.');
 }
 
-access.onstatechange = function(e) {
 
-   // Print information about the (dis)connected MIDI controller
-   console.log(e.port.name, e.port.manufacturer, e.port.state);
- };
 
 function onMIDISuccess(access) {
    checkForPluto(access);
