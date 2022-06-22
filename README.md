@@ -15,3 +15,5 @@ https://www.pjrc.com/teensy/loader.html
 
 ## Troubleshooting
 If Pluto does not reboot, make sure you have “Automatic Mode" selected and try again. If you’re still having trouble, email us at info@modernsounds.co
+
+For more information about Pluto: https://www.modernsounds.co/pluto
