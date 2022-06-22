@@ -1,2 +1,2 @@
-# pluto
+# Pluto
 Firmware updates for Pluto
