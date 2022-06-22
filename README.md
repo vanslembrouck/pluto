@@ -1,5 +1,7 @@
 # Pluto
 
+![pluto_faceplate_1_31_for web monochrome](https://user-images.githubusercontent.com/926197/175042673-11a6a7dd-49dd-4fc1-ae05-1c5b07edf595.png)
+
 
 ## Firmware installation instructions:
 
