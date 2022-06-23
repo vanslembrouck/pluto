@@ -5,8 +5,9 @@
 
 ## Firmware installation instructions:
 
-1. Download the latest firmware
-2. Download the Teensy Loader app here:
+1. Download the latest firmware here:
+https://github.com/vanslembrouck/pluto/releases
+3. Download the Teensy Loader app here:
 https://www.pjrc.com/teensy/loader.html
 3. Plug in Pluto to your computer with the USB cable. Power on Pluto.
 4. Unzip the firmware and open the .hex file with Teensy Loader.
