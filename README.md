@@ -2,6 +2,7 @@
 
 ![pluto_faceplate_1_31_for web monochrome](https://user-images.githubusercontent.com/926197/175042673-11a6a7dd-49dd-4fc1-ae05-1c5b07edf595.png)
 
+For more information about Pluto: https://www.modernsounds.co/pluto
 
 ## Firmware installation instructions:
 
@@ -15,6 +16,14 @@ https://www.pjrc.com/teensy/loader.html
 6. Insert a toothpick or paper clip inside the hole to the right of the USB jack on the back panel. Gently press the button inside. The firmware will load in a few seconds and Pluto will automatically reboot. The update is complete.
 
 ## Troubleshooting
-If Pluto does not reboot, make sure you have “Automatic Mode" selected and try again. If you’re still having trouble, email us at info@modernsounds.co
+If Pluto does not reboot, make sure you have “Automatic Mode" selected and try again. 
 
-For more information about Pluto: https://www.modernsounds.co/pluto
+If you get an error that says "HEX file too large", follwo these instructions: 
+- Close Teensy Loader
+- Unplug Pluto
+- Open Teensy Loader, do not open .hex file
+- Plug in Pluto, press program button with toothpick/etc
+- Open hex file with Teensy Loader 
+
+If you’re still having trouble, email us at info@modernsounds.co
+
