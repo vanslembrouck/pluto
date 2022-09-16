@@ -18,11 +18,12 @@ https://www.pjrc.com/teensy/loader.html
 ## Troubleshooting
 If Pluto does not reboot, make sure you have “Automatic Mode" selected and try again. 
 
-If you get an error that says "HEX file too large", follwo these instructions: 
+If you get an error that says "HEX file too large", follow these instructions: 
 - Close Teensy Loader
 - Unplug Pluto
 - Open Teensy Loader, do not open .hex file
-- Plug in Pluto, press program button with toothpick/etc
+- Plug in Pluto to your computer with the USB cable. Power on Pluto.
+– Insert a toothpick or paper clip inside the hole to the right of the USB jack
 - Open hex file with Teensy Loader 
 
 If you’re still having trouble, email us at info@modernsounds.co
