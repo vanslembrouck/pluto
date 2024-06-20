@@ -1,6 +1,5 @@
 # Pluto
-
-![pluto_faceplate_1_31_for web monochrome](https://user-images.githubusercontent.com/926197/175042673-11a6a7dd-49dd-4fc1-ae05-1c5b07edf595.png)
+![pluto_angle_1200](https://github.com/vanslembrouck/pluto/assets/926197/10706308-a4c8-4db5-a72c-d8c211c510a7)
 
 For more information about Pluto: https://www.modernsounds.co/pluto
 
