@@ -1,4 +1,4 @@
-# Pluto
+# Pluto firmware
 ![pluto_angle_1200](https://github.com/vanslembrouck/pluto/assets/926197/10706308-a4c8-4db5-a72c-d8c211c510a7)
 
 For more information about Pluto: https://www.modernsounds.co/pluto
